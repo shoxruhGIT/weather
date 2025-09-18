@@ -7,9 +7,14 @@ import WeatherDisplay from "./weather-display";
 import { useWeatherData } from "../hook/use-weather-data";
 import ForecastList from "./forecast-list";
 import DataVisualization from "./data-vizualation";
+import { useState } from "react";
+import SettingsPanel from "./settings-panel";
+import { ThemeToggle } from "../server/theme-provider";
 
 const WeatherWidget = () => {
-  const { weatherData, isLoading, error, unit } = useWeatherData();
+  const { weatherData, isLoading, error, unit, refreshData } = useWeatherData();
+
+  const [showSetting, setShowSetting] = useState(false);
 
   return (
     <section className="w-full max-w-[800px] mx-auto weather-widget">
@@ -20,17 +25,12 @@ const WeatherWidget = () => {
               Weather Dashboard
             </CardTitle>
             <div className="flex items-center gap-2">
+              <ThemeToggle />
               <Button
                 size={"icon"}
                 variant={"ghost"}
                 className="w-8 h-8 cursor-pointer"
-              >
-                <Moon />
-              </Button>
-              <Button
-                size={"icon"}
-                variant={"ghost"}
-                className="w-8 h-8 cursor-pointer"
+                onClick={() => setShowSetting(true)}
               >
                 <Settings />
               </Button>
@@ -39,6 +39,15 @@ const WeatherWidget = () => {
           <CitySelector />
         </CardHeader>
         <CardContent>
+          {showSetting && (
+            <div className="animate-in slide-in-from-top-2 duration-300">
+              <SettingsPanel
+                unit={unit}
+                onRefresh={refreshData}
+                onClose={() => setShowSetting(false)}
+              />
+            </div>
+          )}
           <Tabs defaultValue="current" className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="current" className="text-sm cursor-pointer">

@@ -20,6 +20,12 @@ export const useWeatherData = () => {
     fetchWeather();
   }, [fetchWeather]);
 
+  const refreshData = useCallback(() => {
+    if (state.city) {
+      fetchWeather();
+    }
+  }, [state.city, fetchWeather]);
+
   return {
     ...state,
     dispatch,
@@ -27,5 +33,6 @@ export const useWeatherData = () => {
     isLoading: state.isLoading,
     error: state.error,
     unit: state.unit,
+    refreshData,
   };
 };
