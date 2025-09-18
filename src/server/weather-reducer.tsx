@@ -2,8 +2,8 @@ import { createContext, useContext, useReducer, type ReactNode } from "react";
 import type { WeatherAction } from "./types";
 import type { WeatherResponse } from "../lib/weather-api";
 
- interface WeatherState {
-  weatherData: WeatherResponse | [];
+interface WeatherState {
+  weatherData: WeatherResponse | null;
   isLoading: boolean;
   error: string | null;
   unit: "celsius" | "fahrenheit";
@@ -71,7 +71,7 @@ const WeatherContext = createContext<{
 } | null>(null);
 
 const initialState: WeatherState = {
-  weatherData: [],
+  weatherData: null,
   isLoading: false,
   error: null,
   unit: "celsius",
@@ -90,6 +90,8 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
 
 export const useWeather = () => {
   const context = useContext(WeatherContext);
-
+  if (!context) {
+    throw new Error("useWeather must be used within a WeatherProvider");
+  }
   return context;
 };

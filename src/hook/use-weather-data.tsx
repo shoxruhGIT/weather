@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { fetchWeatherData, type WeatherResponse } from "../lib/weather-api";
+import { fetchWeatherData } from "../lib/weather-api";
 import { useWeather } from "../server/weather-reducer";
 
 export const useWeatherData = () => {

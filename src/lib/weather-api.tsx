@@ -25,7 +25,7 @@ export interface ForecastData {
 
 export interface WeatherResponse {
   current: WeatherData;
-  // forecast: ForecastData[];
+  forecast: ForecastData[];
 }
 
 const API_KEY = "9c53ebe02251296d3e778beec1e3dab0";
