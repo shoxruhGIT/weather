@@ -1,4 +1,4 @@
-import { Moon, Settings } from "lucide-react";
+import {  Settings } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import CitySelector from "./city-selector";
