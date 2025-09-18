@@ -14,7 +14,6 @@ interface WeatherDisplayProps {
 const WeatherDisplay = ({
   weatherData,
   isLoading,
-  error,
   unit,
 }: WeatherDisplayProps) => {
 
