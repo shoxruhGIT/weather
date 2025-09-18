@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Droplets, Gauge, Thermometer, Wind } from "lucide-react";
-import { Skeleton } from "./ui/skeleton";
 import type { WeatherData } from "../lib/weather-api";
+import Loader from "./loader";
 
 interface WeatherDisplayProps {
   weatherData?: WeatherData;
@@ -17,26 +17,11 @@ const WeatherDisplay = ({
   error,
   unit,
 }: WeatherDisplayProps) => {
+
+
+
   if (isLoading) {
-    return (
-      <Card>
-        <CardHeader>
-          <Skeleton className="h-6 w-32" />
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Skeleton className="h-16 w-16 rounded-full" />
-            <Skeleton className="h-12 w-24" />
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Skeleton className="h-20 w-full" />
-            <Skeleton className="h-20 w-full" />
-            <Skeleton className="h-20 w-full" />
-            <Skeleton className="h-20 w-full" />
-          </div>
-        </CardContent>
-      </Card>
-    );
+    return <Loader />;
   }
 
   const temp = weatherData?.temperature!;

@@ -3,8 +3,8 @@
 import { Droplets, Wind } from "lucide-react";
 import { Alert, AlertDescription } from "./ui/alert";
 import { Card, CardContent, CardTitle } from "./ui/card";
-import { Skeleton } from "./ui/skeleton";
 import type { ForecastData } from "../lib/weather-api";
+import Loader from "./loader";
 
 interface ForecastListProps {
   forecast?: ForecastData[];
@@ -13,36 +13,9 @@ interface ForecastListProps {
   unit: "celsius" | "fahrenheit";
 }
 
-const ForecastList = ({
-  forecast,
-  isLoading,
-  error,
-  unit,
-}: ForecastListProps) => {
-  if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertDescription>{error}</AlertDescription>
-      </Alert>
-    );
-  }
-
+const ForecastList = ({ forecast, isLoading, unit }: ForecastListProps) => {
   if (isLoading) {
-    return (
-      <div className="grid gap-4">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Card key={i}>
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <Skeleton className="h-6 w-24" />
-                <Skeleton className="h-8 w-8 rounded-full" />
-                <Skeleton className="h-6 w-16" />
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    );
+    return <Loader />;
   }
 
   if (!forecast || forecast.length === 0) {
@@ -70,11 +43,6 @@ const ForecastList = ({
             <CardContent className="p-3 sm:p-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0 flex-1">
-                  {/* <WeatherIcon
-                    icon={day.icon}
-                    size="small"
-                    className="flex-shrink-0"
-                  /> */}
                   <img
                     src={`http://openweathermap.org/img/wn/${day.icon}@2x.png`}
                     alt={day.description}

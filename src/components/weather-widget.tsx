@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import WeatherDisplay from "./weather-display";
 import { useWeatherData } from "../hook/use-weather-data";
 import ForecastList from "./forecast-list";
+import DataVisualization from "./data-vizualation";
 
 const WeatherWidget = () => {
   const { weatherData, isLoading, error, unit } = useWeatherData();
@@ -69,6 +70,9 @@ const WeatherWidget = () => {
                   error={error}
                   unit={unit}
                 />
+              </TabsContent>
+              <TabsContent value="statistics">
+                <DataVisualization />
               </TabsContent>
             </div>
           </Tabs>

@@ -116,3 +116,23 @@ export const fetchWeatherData = async (
     throw new Error("Failed to fetch");
   }
 };
+
+export const sortWeatherDataByDate = (forecast: ForecastData[]) => {
+  return [...forecast].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+};
+
+export const findTemperatureStats = (forecast: ForecastData[]) => {
+  const allTemps = forecast.flatMap((day) => [
+    day.temperature.min,
+    day.temperature.max,
+  ]);
+  return {
+    min: Math.min(...allTemps),
+    max: Math.max(...allTemps),
+    average: Math.round(
+      allTemps.reduce((sum, temp) => sum + temp, 0) / allTemps.length
+    ),
+  };
+};

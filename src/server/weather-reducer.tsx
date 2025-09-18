@@ -75,7 +75,7 @@ const initialState: WeatherState = {
   isLoading: false,
   error: null,
   unit: "celsius",
-  city: "Sydney",
+  city: "London",
 };
 
 export const WeatherProvider = ({ children }: { children: ReactNode }) => {
